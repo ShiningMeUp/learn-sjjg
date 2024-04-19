@@ -1,0 +1,5 @@
+git clone
+git add .
+git commit -m "add some files"
+git pull
+git push
