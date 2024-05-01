@@ -7,7 +7,7 @@ typedef struct node
     struct node *lchild;
     struct node *rchild;
 }BTNode;
-void InitBTNode(BTNode *&b,char *str)
+void InitBTNode(BTNode *&b,const char *str)
 {
     BTNode *Sta[MaxSize],*p;  //p->now node
     int top=-1,k=0,j=0;
