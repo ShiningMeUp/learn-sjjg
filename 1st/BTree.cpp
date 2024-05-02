@@ -1,108 +1,108 @@
-#include <stdio.h>
-#include <stdlib.h> //A(B(D(,G)),C(E,F))
+//A(B(D(,G)),C(E,F))
 #include <iostream>
 #include <stack>
 #include <queue>
+#include <string>
+#include <stdlib.h>
 #define MaxSize 100
 using namespace std;
 typedef struct node
 {
-    char data;
-    struct node *lchild;
-    struct node *rchild;
+	char data;
+	struct node *lchild;
+	struct node *rchild;
 }BTNode;
-void InitBTNode(BTNode *&b,const char *str)
+void InitBTNode(BTNode *&b,const string s)
 {
-    BTNode *Sta[MaxSize],*p;  //p->now node
-    int top=-1,k=0,j=0;
-    char ch;
-    ch=str[j];
-    b=NULL;
-    while(ch!='\0')
-    {
-        switch(ch)
-        {
-            case '(':top++;k=1;Sta[top]=p;break;    //lchild
-            case ')':top--;break;
-            case ',':k=2;break;
-            default:
-                p=(BTNode *)malloc(sizeof(BTNode));
-                p->data=ch;
-                p->lchild=p->rchild=NULL;
-                if(b==NULL)
-                    b=p;
-                else{
-                    switch(k)
-                    {
-                        case 1:Sta[top]->lchild=p;break;
-                        case 2:Sta[top]->rchild=p;break;
-                    }
-                }
-        }
-        j++;
-        ch=str[j];
-    }
+	b=NULL;
+	BTNode *p,*St[MaxSize];
+	int j=0,top=-1,k;
+	char ch=s[j];
+	while(ch!='\0')
+	{
+		switch(ch)
+		{
+			case '(':top++;St[top]=p;k=1;break;
+			case ',':k=2;break;
+			case ')':top--;break;
+			default:
+				p=(BTNode *)malloc(sizeof(BTNode));
+				p->data = ch;
+				p->lchild  =NULL;
+				p->rchild =NULL;
+				if(b==NULL)
+					b=p;
+				else{
+					switch(k)
+					{
+						case 1:St[top]->lchild=p;break;
+						case 2:St[top]->rchild=p;break;
+					}
+				}
+				
+		}
+		j++;
+		ch=s[j];
+	}
 }
-void DispBTree(BTNode *b)
+void DisplayNormal(BTNode *b)
 {
-    if(b!=NULL)
-    {
-        printf("%c",b->data );
-        if(b->lchild!=NULL || b->rchild!=NULL)
-        {
-            printf("(");
-            DispBTree(b->lchild);
-            if(b->rchild!=NULL)
-                printf(",");
-            DispBTree(b->rchild);
-            printf(")");
-        }
-    }
+	if(b!=NULL)
+	{
+		cout<<b->data ;
+		if(b->lchild !=NULL || b->rchild !=NULL)
+		{
+			cout<<'(';
+			if(b->lchild !=NULL)
+			DisplayNormal(b->lchild );
+			if(b->rchild !=NULL)
+			{
+				cout<<',';
+				DisplayNormal(b->rchild );
+			}
+			cout<<')';
+		}
+	}
 }
-void DisplayOut(BTNode *b)//非递归
+void Display(BTNode *b)//非递归 
 {
-    BTNode *p;
-    std::stack<BTNode *> st;
-    if(b!=NULL)
-    {
-        st.push(b);
-        while (!st.empty())
-        {
-            p=st.top();
-            cout<<p->data;
-            st.pop();
-            if(p->rchild!=NULL)   //先右子树，再左子树 栈先进后出
-                st.push(p->rchild); //p->rchild 不能用b->rchild 因为会一直对同一个点操作
-            if(p->lchild!=NULL)
-                st.push(p->lchild);
-        }
-    }
+	stack<BTNode *> st;
+	BTNode *p;
+	st.push(b);
+	while(!st.empty())
+	{
+		p=st.top();
+		cout<<p->data;
+		st.pop();
+		if(p->rchild !=NULL)  //栈先进后出，要想先遍历lchild，就要将rchild先进栈 
+			st.push(p->rchild);
+		if(p->lchild !=NULL)
+			st.push(p->lchild);
+	}
 }
 void LevelOrder(BTNode *b)
 {
-    BTNode *p;
-    queue<BTNode *> qu;
-    qu.push(b);
-    while(!qu.empty())
-    {
-        p=qu.front();
-        qu.pop();
-        cout<<p->data;
-        if(p->lchild!=NULL)
-            qu.push(p->lchild);
-        if(p->rchild!=NULL)
-            qu.push(p->rchild);
-    }
-    cout<<endl;
+	queue<BTNode *> qu;
+	BTNode *p;
+	qu.push(b);
+	while(!qu.empty())
+	{
+		p=qu.front();
+		cout<<p->data;
+		qu.pop();
+		if(p->lchild !=NULL)
+		qu.push(p->lchild);
+		if(p->rchild !=NULL)
+		qu.push(p->rchild);
+	}
 }
 int main()
 {
-    BTNode *b;
-    InitBTNode(b,"A(B(D(,G)),C(E,F))");
-    DispBTree(b);
-    printf("\n");
-    DisplayOut(b);
-    printf("\n");
-    LevelOrder(b);
-    return 0;
+	BTNode *b;
+	InitBTNode(b,"A(B(D(,G)),C(E,F))");
+	DisplayNormal(b);
+		cout<<endl;
+	Display(b);
+		cout<<endl;
+	LevelOrder(b);
 }
