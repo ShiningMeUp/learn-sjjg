@@ -1,6 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h> //A(B(D(,G)),C(E,F))
+#include <iostream>
+#include <stack>
 #define MaxSize 100
+using namespace std;
 typedef struct node
 {
     char data;
@@ -55,10 +58,31 @@ void DispBTree(BTNode *b)
         }
     }
 }
+void DisplayOut(BTNode *b)//非递归
+{
+    BTNode *p;
+    std::stack<BTNode *> st;
+    if(b!=NULL)
+    {
+        st.push(b);
+        while (!st.empty())
+        {
+            p=st.top();
+            cout<<p->data;
+            st.pop();
+            if(p->rchild!=NULL)   //先右子树，再左子树 栈先进后出
+                st.push(p->rchild); //p->rchild 不能用b->rchild 因为会一直对同一个点操作
+            if(p->lchild!=NULL)
+                st.push(p->lchild);
+        }
+    }
+}
 int main()
 {
     BTNode *b;
     InitBTNode(b,"A(B(D(,G)),C(E,F))");
     DispBTree(b);
+    printf("\n");
+    DisplayOut(b);
     return 0;
 }
