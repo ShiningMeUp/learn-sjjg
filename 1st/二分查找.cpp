@@ -1,23 +1,23 @@
 #include <iostream>
 #include <vector>
 using namespace std;
-int searchInsert(vector<int>& nums, int target) {
-    int l=0,r=nums.size()-1;
-    while(l<=r)
+int Binsearch(vector<int> &nums,int target)
+{
+    int left=0,right=nums.size()-1;
+    while(left<=right)
     {
-        int mid=l+(r-l)/2;
+        int mid=left+(right-left)/2;
         if(target<nums[mid])
-            r=mid-1;
+            right=mid-1;
         else if(target>nums[mid])
-        l=mid+1;
-        else
-            return mid;
+            left=mid+1;
+        else return mid;
     }
     return -1;
 }
 int main()
 {
-    vector<int> nums= {1,2,3,4,5,6,7};
-    int res= searchInsert(nums,6);
+    vector<int> nums={1,2,3,4,5,6,7,8,9,10};
+    int res= Binsearch(nums,6);
     cout<<res;
 }
