@@ -2,6 +2,7 @@
 #include <stdlib.h> //A(B(D(,G)),C(E,F))
 #include <iostream>
 #include <stack>
+#include <queue>
 #define MaxSize 100
 using namespace std;
 typedef struct node
@@ -77,6 +78,23 @@ void DisplayOut(BTNode *b)//·ÇµÝ¹é
         }
     }
 }
+void LevelOrder(BTNode *b)
+{
+    BTNode *p;
+    queue<BTNode *> qu;
+    qu.push(b);
+    while(!qu.empty())
+    {
+        p=qu.front();
+        qu.pop();
+        cout<<p->data;
+        if(p->lchild!=NULL)
+            qu.push(p->lchild);
+        if(p->rchild!=NULL)
+            qu.push(p->rchild);
+    }
+    cout<<endl;
+}
 int main()
 {
     BTNode *b;
@@ -84,5 +102,7 @@ int main()
     DispBTree(b);
     printf("\n");
     DisplayOut(b);
+    printf("\n");
+    LevelOrder(b);
     return 0;
 }
