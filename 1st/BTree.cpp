@@ -96,6 +96,16 @@ void LevelOrder(BTNode *b)
 		qu.push(p->rchild);
 	}
 }
+void Destroy(BTNode *&b)
+{
+	if(b!=NULL)
+	{
+		free(b->lchild);
+		free(b->rchild);
+		free(b);
+		cout<<endl<<"Freed";
+	}	
+}
 int main()
 {
 	BTNode *b;
@@ -105,4 +115,5 @@ int main()
 	Display(b);
 		cout<<endl;
 	LevelOrder(b);
+	Destroy(b);
 }
