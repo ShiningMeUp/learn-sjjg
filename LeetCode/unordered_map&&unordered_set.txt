@@ -1,0 +1,137 @@
+`unordered_set`是C++标准库中的一个容器，它存储唯一元素并允许高效的查找、插入和删除操作。由于使用哈希表实现，其元素没有特定的顺序。以下是`unordered_set`的主要成员函数：
+
+### 构造函数与析构函数
+
+1. **构造函数**
+   - `unordered_set()`: 创建一个空的`unordered_set`。
+   - `unordered_set(initializer_list il)`: 使用初始化列表创建一个`unordered_set`。
+   - `unordered_set(const unordered_set& other)`: 拷贝构造函数，从另一个`unordered_set`拷贝元素。
+   - `unordered_set(unordered_set&& other) noexcept`: 移动构造函数，从另一个`unordered_set`移动元素。
+   - `template<class InputIt> unordered_set(InputIt first, InputIt last)`: 使用一对迭代器范围创建一个`unordered_set`。
+
+2. **析构函数**
+   - `~unordered_set()`: 销毁`unordered_set`，释放所有资源。
+
+### 迭代器
+
+- `begin()`: 返回指向容器第一个元素的迭代器。
+- `end()`: 返回指向容器尾后位置的迭代器。
+- `cbegin()`: 返回指向容器第一个元素的常量迭代器。
+- `cend()`: 返回指向容器尾后位置的常量迭代器。
+
+### 容量
+
+- `empty()`: 检查容器是否为空。
+- `size()`: 返回容器中元素的数量。
+- `max_size()`: 返回容器可容纳的最大元素数量。
+
+### 修改器
+
+- `clear()`: 清空容器中的所有元素。
+- `insert(const value_type& value)`: 插入元素，如果元素已存在则不插入。
+- `insert(value_type&& value)`: 插入元素，使用移动语义。
+- `insert(initializer_list il)`: 插入初始化列表中的所有元素。
+- `emplace(Args&&... args)`: 直接构造元素并插入容器。
+- `emplace_hint(ConstIterator hint, Args&&... args)`: 在指定位置直接构造元素并插入容器。
+- `erase(ConstIterator pos)`: 移除指定位置的元素。
+- `erase(ConstIterator first, ConstIterator last)`: 移除指定范围内的元素。
+- `erase(const key_type& key)`: 移除具有指定键的元素。
+- `swap(unordered_set& other) noexcept`: 交换两个`unordered_set`的内容。
+
+### 查找
+
+- `find(const key_type& key)`: 查找具有指定键的元素，返回指向该元素的迭代器，如果未找到则返回`end()`。
+- `count(const key_type& key)`: 返回具有指定键的元素的数量（`unordered_set`中要么是0要么是1）。
+- `equal_range(const key_type& key)`: 返回具有指定键的元素的范围。
+
+### 桶接口
+
+- `bucket_count()`: 返回桶的数量。
+- `max_bucket_count()`: 返回最多可以有多少个桶。
+- `bucket_size(size_type n)`: 返回指定桶中元素的数量。
+- `bucket(const key_type& key)`: 返回存储指定键的桶的编号。
+
+### 哈希策略
+
+- `load_factor()`: 返回当前负载因子。
+- `max_load_factor()`: 返回允许的最大负载因子。
+- `rehash(size_type count)`: 重新设置桶的数量，使其至少等于指定数量。
+- `reserve(size_type count)`: 预留空间，使`unordered_set`至少可以容纳指定数量的元素而不必重哈希。
+
+### 哈希函数和键比较
+
+- `hash_function()`: 返回用于哈希表的哈希函数。
+- `key_eq()`: 返回用于键比较的函数对象。
+
+这些函数提供了丰富的接口，使得`unordered_set`能够高效地进行元素管理和查找操作。
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+`unordered_map`是C++标准库中的一个容器，它提供了一种键值对（key-value）的映射关系，使用哈希表来实现。以下是`unordered_map`的主要成员函数：
+
+### 构造函数与析构函数
+
+1. **构造函数**
+   - `unordered_map()`: 创建一个空的`unordered_map`。
+   - `unordered_map(initializer_list il)`: 使用初始化列表创建一个`unordered_map`。
+   - `unordered_map(const unordered_map& other)`: 拷贝构造函数，从另一个`unordered_map`拷贝元素。
+   - `unordered_map(unordered_map&& other) noexcept`: 移动构造函数，从另一个`unordered_map`移动元素。
+   - `template<class InputIt> unordered_map(InputIt first, InputIt last)`: 使用一对迭代器范围创建一个`unordered_map`。
+
+2. **析构函数**
+   - `~unordered_map()`: 销毁`unordered_map`，释放所有资源。
+
+### 迭代器
+
+- `begin()`: 返回指向容器第一个元素的迭代器。
+- `end()`: 返回指向容器尾后位置的迭代器。
+- `cbegin()`: 返回指向容器第一个元素的常量迭代器。
+- `cend()`: 返回指向容器尾后位置的常量迭代器。
+
+### 容量
+
+- `empty()`: 检查容器是否为空。
+- `size()`: 返回容器中键值对的数量。
+- `max_size()`: 返回容器可容纳的最大键值对数量。
+
+### 修改器
+
+- `clear()`: 清空容器中的所有键值对。
+- `insert(const value_type& value)`: 插入键值对，如果键已存在则不插入。
+- `insert(value_type&& value)`: 插入键值对，使用移动语义。
+- `insert(initializer_list il)`: 插入初始化列表中的所有键值对。
+- `emplace(Args&&... args)`: 直接构造键值对并插入容器。
+- `emplace_hint(ConstIterator hint, Args&&... args)`: 在指定位置直接构造键值对并插入容器。
+- `erase(ConstIterator pos)`: 移除指定位置的键值对。
+- `erase(const key_type& key)`: 移除具有指定键的键值对。
+- `erase(ConstIterator first, ConstIterator last)`: 移除指定范围内的键值对。
+- `swap(unordered_map& other) noexcept`: 交换两个`unordered_map`的内容。
+
+### 查找
+
+- `find(const key_type& key)`: 查找具有指定键的元素，返回指向该元素的迭代器，如果未找到则返回`end()`。
+- `count(const key_type& key)`: 返回具有指定键的键值对的数量（`unordered_map`中要么是0要么是1）。
+- `equal_range(const key_type& key)`: 返回具有指定键的键值对的范围。
+
+### 桶接口
+
+- `bucket_count()`: 返回桶的数量。
+- `max_bucket_count()`: 返回最多可以有多少个桶。
+- `bucket_size(size_type n)`: 返回指定桶中键值对的数量。
+- `bucket(const key_type& key)`: 返回存储指定键的桶的编号。
+
+### 哈希策略
+
+- `load_factor()`: 返回当前负载因子。
+- `max_load_factor()`: 返回允许的最大负载因子。
+- `rehash(size_type count)`: 重新设置桶的数量，使其至少等于指定数量。
+- `reserve(size_type count)`: 预留空间，使`unordered_map`至少可以容纳指定数量的键值对而不必重哈希。
+
+### 哈希函数和键比较
+
+- `hash_function()`: 返回用于哈希表的哈希函数。
+- `key_eq()`: 返回用于键比较的函数对象。
+
+这些函数提供了丰富的接口，使得`unordered_map`能够高效地进行键值对的管理和查找操作。
+
